@@ -2,10 +2,7 @@ package view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -29,13 +26,17 @@ public class RegisterUserScene implements AppScene {
      * Default Contructor for LogInScene
      */
     RegisterUserScene(){
+        ToggleGroup typeGroup = new ToggleGroup();
         userButton = new RadioButton("User");
+        userButton.setToggleGroup(typeGroup);
         tutorButton = new RadioButton("Tutor");
+        tutorButton.setToggleGroup(typeGroup);
         nameLabel = new Label("Name: ");
         nameField = new TextField();
         IDLabel = new Label("PSU ID: ");
         IDField = new TextField();
         backButton = new Button("Back");
+        backButton.setOnAction( (event -> GUI.setScene( GUI.getScene("LogInScene") )) );
         enterButton = new Button("Enter");
     }
 
