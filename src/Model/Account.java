@@ -4,11 +4,11 @@ abstract public class Account {
     private String username;
     private String password;
 
-    public Integer getId() {
+    public Integer getID() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setID(Integer id) {
         this.id = id;
     }
 

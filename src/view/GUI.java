@@ -1,6 +1,9 @@
 package view;
+import Model.Database;
 import javafx.stage.Stage;
 import javafx.application.Application;
+
+import javax.swing.text.View;
 
 /**
  * view.GUI.java
@@ -11,6 +14,8 @@ public class GUI extends Application {
     private static Stage stage;
     private static LogInScene logInScene;
     private static RegisterUserScene registerUserScene;
+    private static Database DB;
+    private static ViewAccount ViewAccountScene;
 
     /**
      * Starts the Program and Launches JavaFX Stage.
@@ -31,6 +36,8 @@ public class GUI extends Application {
     public void initialize(){
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
+        DB = new Database();
+        ViewAccountScene = new ViewAccount();
     }
 
     /**
@@ -42,18 +49,34 @@ public class GUI extends Application {
     }
 
     /**
-     * Gets Scene from String Name
-     * @param name name of scene to get
-     * @return scene as appscene object
+     * Gets Register User Scene
+     * @return scene abject
      */
-    public static AppScene getScene(String name) {     // this is probably terrible design IDK
-        switch (name) {
-            case "registerUserScene":
-                return registerUserScene;
-            default:
-                return logInScene;
-        }
+    public static RegisterUserScene getRegisterUserScene() {
+        return registerUserScene;
     }
+
+    /**
+     * Gets Register User Scene
+     * @return scene abject
+     */
+    public static LogInScene getLogInScene() {
+        return logInScene;
+    }
+
+    public static void popupError( Exception e ) {
+        ExceptionStage eStage = new ExceptionStage();
+        eStage.makeScene( e );
+    }
+
+    public static ViewAccount getViewAccountScene(){
+        return ViewAccountScene;
+    }
+
+    public static Database getDB() {
+        return DB;
+    }
+
 
 
 }

@@ -8,12 +8,12 @@ public class Database {
 
     public Database() {
         database = new HashMap<Integer, Account>();
-        numAccounts = 1;
+        numAccounts = 0;
     }
 
     public static Integer addAccount(Account a){
         database.put(numAccounts, a);
-        a.setId(numAccounts);
+        a.setID(numAccounts);
         return numAccounts++;
     }
 
@@ -30,5 +30,7 @@ public class Database {
                     return false;
         }
         return false;
-    };
+    }
+
+
 }

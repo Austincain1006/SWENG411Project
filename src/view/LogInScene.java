@@ -21,9 +21,9 @@ public class LogInScene implements AppScene {
    private HBox line4;
    private Label loginLabel;
    private Label usernameLabel;
-   private Label IDLabel;
+   private Label passwordLabel;
    private TextField usernameField;
-   private TextField IDField;
+   private TextField passwordField;
    private Button registerButton;
    private Button loginButton;
 
@@ -33,13 +33,13 @@ public class LogInScene implements AppScene {
    LogInScene(){
        loginLabel = new Label( "Please Log In ");
        usernameLabel = new Label( "Enter Username: ");
-       IDLabel = new Label( "Enter PSU ID: ");
+       passwordLabel = new Label( "Enter Password: ");
 
        usernameField = new TextField();
-       IDField = new TextField();
+       passwordField = new TextField();
 
        registerButton = new Button( "Register" );
-       registerButton.setOnAction( (event -> GUI.setScene( GUI.getScene("registerUserScene") )) );
+       registerButton.setOnAction( (event -> GUI.setScene( GUI.getRegisterUserScene() )) );
 
        loginButton = new Button( "Log In");
        loginButton.setOnAction( new HandleLogInEvent() );
@@ -68,8 +68,8 @@ public class LogInScene implements AppScene {
         line2.getChildren().add(usernameLabel);
         line2.getChildren().add(usernameField);
 
-        line3.getChildren().add(IDLabel);
-        line3.getChildren().add(IDField);
+        line3.getChildren().add(passwordLabel);
+        line3.getChildren().add(passwordField);
 
         line4.getChildren().add(registerButton);
         line4.getChildren().add(loginButton);
@@ -80,5 +80,13 @@ public class LogInScene implements AppScene {
         root.getChildren().add( line4 );
 
         return new Scene( root, 400, 300 );
+    }
+
+    public TextField getUsernameField(){
+        return usernameField;
+    }
+
+    public TextField getPasswordField(){
+        return passwordField;
     }
 }

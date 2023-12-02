@@ -1,5 +1,6 @@
 package view;
 
+import controller.RegisterNewAccount;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,9 +16,9 @@ public class RegisterUserScene implements AppScene {
     private RadioButton userButton;
     private RadioButton tutorButton;
     private Label nameLabel;
-    private Label IDLabel;
+    private Label passwordLabel;
     private TextField nameField;
-    private TextField IDField;
+    private TextField passwordTextField;
     private Button backButton;
     private Button enterButton;
 
@@ -30,14 +31,16 @@ public class RegisterUserScene implements AppScene {
         userButton = new RadioButton("User");
         userButton.setToggleGroup(typeGroup);
         tutorButton = new RadioButton("Tutor");
+        tutorButton.setSelected(true);
         tutorButton.setToggleGroup(typeGroup);
         nameLabel = new Label("Name: ");
         nameField = new TextField();
-        IDLabel = new Label("PSU ID: ");
-        IDField = new TextField();
+        passwordLabel = new Label("Password: ");
+        passwordTextField = new TextField();
         backButton = new Button("Back");
-        backButton.setOnAction( (event -> GUI.setScene( GUI.getScene("LogInScene") )) );
+        backButton.setOnAction( (event -> GUI.setScene( GUI.getLogInScene() )) );
         enterButton = new Button("Enter");
+        enterButton.setOnAction( new RegisterNewAccount() );
     }
 
     /**
@@ -64,8 +67,8 @@ public class RegisterUserScene implements AppScene {
         line2.getChildren().add(nameLabel);
         line2.getChildren().add(nameField);
 
-        line3.getChildren().add(IDLabel);
-        line3.getChildren().add(IDField);
+        line3.getChildren().add(passwordLabel);
+        line3.getChildren().add(passwordTextField);
 
         line4.getChildren().add(backButton);
         line4.getChildren().add(enterButton);
@@ -76,5 +79,22 @@ public class RegisterUserScene implements AppScene {
         root.getChildren().add(line4);
 
         return new Scene(root, 400, 300 );
+    }
+
+
+    public RadioButton getUserButton() {
+        return userButton;
+    }
+
+    public RadioButton getTutorButton() {
+        return tutorButton;
+    }
+
+    public TextField getNameField() {
+        return nameField;
+    }
+
+    public TextField getPasswordTextField() {
+        return passwordTextField;
     }
 }
