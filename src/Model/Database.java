@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Exceptions.AccountNotFound;
+
 import java.util.HashMap;
 
 public class Database {
@@ -17,14 +19,18 @@ public class Database {
         return numAccounts++;
     }
 
-    public static Account getAccount(Integer i){
-        return database.get(i);
+    public static Account getAccount(Integer i) throws AccountNotFound {
+        if (database.get( i ) == null)
+            return database.get( i );
+        else
+            throw new AccountNotFound();
+
     }
 
     public static boolean correctLogin(String username, String password){
         for (int i = 0; i < numAccounts; i++) {
-            if (database.get(i).getUsername() == username)
-                if (database.get(i).getPassword() == password)
+            if (database.get(i).getUsername().equals( username ))
+                if (database.get(i).getPassword().equals( password ))
                     return true;
                 else
                     return false;

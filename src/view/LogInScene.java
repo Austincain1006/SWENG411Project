@@ -43,6 +43,7 @@ public class LogInScene implements AppScene {
 
        loginButton = new Button( "Log In");
        loginButton.setOnAction( new HandleLogInEvent() );
+
    }
 
     /**

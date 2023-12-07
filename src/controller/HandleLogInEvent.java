@@ -36,7 +36,6 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
 
         if ( username.isEmpty() || password.isEmpty() )
             throw new MissingFieldException();
-
         if ( GUI.getDB().correctLogin( username, password) == true )
             GUI.setScene( GUI.getViewAccountScene() );
         else

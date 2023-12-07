@@ -16,6 +16,7 @@ public class GUI extends Application {
     private static RegisterUserScene registerUserScene;
     private static Database DB;
     private static ViewAccount ViewAccountScene;
+    private static StudentHomeScreen studentHomeScreen;
 
     /**
      * Starts the Program and Launches JavaFX Stage.
@@ -34,10 +35,11 @@ public class GUI extends Application {
      * Initializes all Scenes to be Used in GUI
      */
     public void initialize(){
+        DB = new Database();
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
-        DB = new Database();
         ViewAccountScene = new ViewAccount();
+        studentHomeScreen = new StudentHomeScreen();
     }
 
     /**
@@ -75,6 +77,10 @@ public class GUI extends Application {
 
     public static Database getDB() {
         return DB;
+    }
+
+    public static StudentHomeScreen getStudentHomeScreen() {
+        return studentHomeScreen;
     }
 
 
