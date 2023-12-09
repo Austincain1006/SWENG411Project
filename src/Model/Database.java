@@ -1,7 +1,6 @@
 package Model;
 
 import Model.Exceptions.AccountNotFound;
-
 import java.util.HashMap;
 
 public class Database {
@@ -37,6 +36,14 @@ public class Database {
                     return false;
         }
         return false;
+    }
+
+    public static Account searchUsername(String username) throws AccountNotFound{
+        for (int i = 0; i < numAccounts; i++) {
+            if (database.get(i).getUsername().equals( username ))
+                return database.get(i);
+        }
+        throw new AccountNotFound();
     }
 
 

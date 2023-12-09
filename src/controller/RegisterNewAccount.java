@@ -43,8 +43,7 @@ public class RegisterNewAccount implements EventHandler<ActionEvent> {
                 throw new MissingFieldException();
             }
 
-            Integer id = GUI.getDB().addAccount(newStudent);
-            newStudent.setID( id );
+            newStudent.setID( GUI.getDB().addAccount(newStudent) );
 
         } else if ( registerScene.getTutorButton().isSelected() ) {
             // Make Tutor
@@ -62,8 +61,7 @@ public class RegisterNewAccount implements EventHandler<ActionEvent> {
                 throw new MissingFieldException();
             }
 
-            Integer id = GUI.getDB().addAccount(newTutor);
-            newTutor.setID( id );
+            newTutor.setID( GUI.getDB().addAccount(newTutor) );
 
         } else {
             throw new MissingFieldException();

@@ -24,19 +24,11 @@ public class ViewAccount implements AppScene{
         line1.setAlignment( Pos.CENTER );
         line2.setAlignment( Pos.CENTER );
 
-        System.out.println(GUI.getLogInScene());
-        System.out.println(GUI.getLogInScene().getUsernameField().getText());
-        System.out.println(GUI.getLogInScene().getPasswordField().getText());
-        System.out.println(accountName);
-        System.out.println(accountPassword);
         accountName = new Label();
         accountPassword = new Label();
         accountName.setText( GUI.getLogInScene().getUsernameField().getText() );
         accountPassword.setText( GUI.getLogInScene().getPasswordField().getText() );
 
-        System.out.println("AccountName: "+accountName);
-        System.out.println(accountPassword);
-        System.out.println(line1.getChildren());
         line1.getChildren().add(accountName);
         line2.getChildren().add(accountPassword);
 
