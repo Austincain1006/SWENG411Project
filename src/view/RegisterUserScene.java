@@ -30,8 +30,8 @@ public class RegisterUserScene implements AppScene {
         ToggleGroup typeGroup = new ToggleGroup();
         userButton = new RadioButton("User");
         userButton.setToggleGroup(typeGroup);
+        userButton.setSelected(true);
         tutorButton = new RadioButton("Tutor");
-        tutorButton.setSelected(true);
         tutorButton.setToggleGroup(typeGroup);
         nameLabel = new Label("Name: ");
         nameField = new TextField();

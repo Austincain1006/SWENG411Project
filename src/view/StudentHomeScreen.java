@@ -1,5 +1,6 @@
 package view;
 import Model.Exceptions.AccountNotFound;
+import Model.Student;
 import controller.HandleLogInEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,14 +20,16 @@ public class StudentHomeScreen implements AppScene {
    private VBox root;
    private HBox line1;
    private HBox line2;
-   private Label text;
+   private Label studentName;
    private Button backButton;
+   private Button scheduleButton;
+   private Button viewAppointments;
+   private Student student;
 
     /**
      * Default Contructor for LogInScene
      */
    StudentHomeScreen(){
-
        backButton = new Button( "Log out" );
        backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ) );
    }
@@ -45,7 +48,11 @@ public class StudentHomeScreen implements AppScene {
         line1.setAlignment( Pos.CENTER );
         line2.setAlignment( Pos.CENTER );
 
-        line1.getChildren().add(text);
+        studentName = new Label();
+        scheduleButton = new Button("Schedule Appointment");
+        backButton = new Button("Log out");
+        backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
+
         line2.getChildren().add(backButton);
 
         root.getChildren().add( line1 );
@@ -54,4 +61,7 @@ public class StudentHomeScreen implements AppScene {
         return new Scene( root, 400, 300 );
     }
 
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import Model.Account;
 import Model.Database;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ public class ViewAccount implements AppScene{
     private VBox root;
     private HBox line1;
     private HBox line2;
+    private Account account;
 
     @Override
     public Scene makeScene() {
@@ -26,8 +28,16 @@ public class ViewAccount implements AppScene{
 
         accountName = new Label();
         accountPassword = new Label();
-        accountName.setText( GUI.getLogInScene().getUsernameField().getText() );
-        accountPassword.setText( GUI.getLogInScene().getPasswordField().getText() );
+
+        if (account != null) {
+            accountName.setText( account.getUsername() );
+            accountPassword.setText( account.getPassword() );
+        } else {
+            System.out.println( "ACCOUNT NOT FOUND" );
+            accountName.setText( GUI.getLogInScene().getUsernameField().getText() );
+            accountPassword.setText( GUI.getLogInScene().getPasswordField().getText() );
+        }
+
 
         line1.getChildren().add(accountName);
         line2.getChildren().add(accountPassword);
@@ -38,5 +48,8 @@ public class ViewAccount implements AppScene{
         return new Scene(root, 400, 300 );
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
 }
