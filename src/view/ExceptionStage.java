@@ -41,6 +41,7 @@ public class ExceptionStage {
             exceptionLabel = new Label("Account not found. Please check your username and password.");
         } else {
             exceptionLabel = new Label( "Unknown error.");
+            System.out.println("e: "+e);
             System.out.println( e.getCause() );
             System.out.println( e.getMessage() );
             System.out.println( e.toString() );

@@ -20,7 +20,8 @@ public class Database {
     }
 
     public static Account getAccount(Integer i) throws AccountNotFound {
-        if (database.get( i ) == null)
+        System.out.println(database);
+        if (database.get( i ) != null)
             return database.get( i );
         else
             throw new AccountNotFound();

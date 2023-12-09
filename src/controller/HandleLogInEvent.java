@@ -23,6 +23,7 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
         try {
             login();
         } catch (Exception E ) {
+            System.out.println("E: "+E);
             GUI.popupError( E );
         }
 
@@ -36,8 +37,11 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
 
         if ( username.isEmpty() || password.isEmpty() )
             throw new MissingFieldException();
-        if ( GUI.getDB().correctLogin( username, password) == true )
-            GUI.setScene( GUI.getViewAccountScene() );
+        if ( GUI.getDB().correctLogin( username, password) == true ) {
+            System.out.println("Before");
+            GUI.setScene(GUI.getViewAccountScene());
+            System.out.println("After");
+        }
         else
             throw new InvalidLoginException();
 
