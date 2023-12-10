@@ -24,7 +24,6 @@ public class Database {
             return database.get( i );
         else
             throw new AccountNotFound();
-
     }
 
     public static boolean correctLogin(String username, String password){

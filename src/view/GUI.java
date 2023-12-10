@@ -1,9 +1,8 @@
 package view;
 import Model.Database;
+import Model.Faculty;
 import javafx.stage.Stage;
 import javafx.application.Application;
-
-import javax.swing.text.View;
 
 /**
  * view.GUI.java
@@ -17,6 +16,7 @@ public class GUI extends Application {
     private static Database DB;
     private static ViewAccount ViewAccountScene;
     private static StudentHomeScreen studentHomeScreen;
+    private static FacultyHomeScreen facultyHomeScreen;
 
     /**
      * Starts the Program and Launches JavaFX Stage.
@@ -36,10 +36,23 @@ public class GUI extends Application {
      */
     public void initialize(){
         DB = new Database();
+        Database.addAccount( getDefaultFaculty() );
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
         ViewAccountScene = new ViewAccount();
         studentHomeScreen = new StudentHomeScreen();
+        facultyHomeScreen = new FacultyHomeScreen();
+    }
+
+    /**
+     * Gets Default Faculty Member to manage Tutoring
+     * @return Faculty Object
+     */
+    private Faculty getDefaultFaculty() {
+        Faculty f = new Faculty();
+        f.setUsername("ruth");
+        f.setPassword("1234");
+        return f;
     }
 
     /**
@@ -63,6 +76,7 @@ public class GUI extends Application {
      * @return scene abject
      */
     public static LogInScene getLogInScene() {
+        //logInScene.clearTextFields(); // for some reason this line just breaks everything IDK why
         return logInScene;
     }
 
@@ -83,6 +97,8 @@ public class GUI extends Application {
         return studentHomeScreen;
     }
 
-
+    public static FacultyHomeScreen getFacultyHomeScreen() {
+        return facultyHomeScreen;
+    }
 
 }

@@ -90,4 +90,9 @@ public class LogInScene implements AppScene {
     public TextField getPasswordField(){
         return passwordField;
     }
+
+    public void clearTextFields() {
+        usernameField.setText("");
+        passwordField.setText("");
+    }
 }

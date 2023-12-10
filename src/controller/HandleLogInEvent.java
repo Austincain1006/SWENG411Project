@@ -1,11 +1,8 @@
 package controller;
 
-import Model.Account;
-import Model.Database;
+import Model.*;
 import Model.Exceptions.InvalidLoginException;
 import Model.Exceptions.MissingFieldException;
-import Model.Student;
-import Model.Tutor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import view.ExceptionStage;
@@ -26,7 +23,6 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
         try {
             login();
         } catch (Exception E ) {
-            System.out.println("E: " + E);
             GUI.popupError( E );
         }
 
@@ -43,19 +39,20 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
             account = Database.searchUsername( username );
 
             if (account instanceof Student){
+                System.out.println( "Attempting student home page...");
                 GUI.getStudentHomeScreen().setStudent( (Student)account );
                 GUI.setScene(GUI.getStudentHomeScreen());
-            }
-            if (account instanceof Tutor) {
+            } else if (account instanceof Tutor) {
                 GUI.getViewAccountScene().setAccount( account );
                 GUI.setScene(GUI.getViewAccountScene());
-            }
-            else {
+            } else if (account instanceof Faculty) {
+                GUI.getFacultyHomeScreen().setFaculty( (Faculty)account );
+                GUI.setScene(GUI.getFacultyHomeScreen());
+            } else {
                 System.out.println("What");
             }
 
-        }
-        else
+        } else
             throw new InvalidLoginException();
     }
 }

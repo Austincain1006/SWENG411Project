@@ -1,37 +1,34 @@
 package view;
-import Model.Exceptions.AccountNotFound;
+import Model.Account;
+import Model.Faculty;
 import Model.Student;
-import controller.HandleLogInEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 /**
  * LogInScene.java
  * Page for Logging into Accounts and Registering New Ones
  * @author Austin
  */
-public class StudentHomeScreen implements AppScene {
+public class FacultyHomeScreen implements AppScene {
    private VBox root;
    private HBox line1;
    private HBox line2;
    private HBox line3;
    private HBox line4;
-   private Label studentName;
+   private Label facultyName;
    private Button backButton;
-   private Button scheduleButton;
-   private Button viewAppointments;
-   private Student student;
+   private Button removeTutor;
+   private Faculty faculty;
 
     /**
      * Default Contructor for LogInScene
      */
-   StudentHomeScreen(){
+   FacultyHomeScreen(){
        backButton = new Button( "Log out" );
        backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ) );
    }
@@ -51,18 +48,21 @@ public class StudentHomeScreen implements AppScene {
         root.setAlignment( Pos.CENTER );
         line1.setAlignment( Pos.CENTER );
         line2.setAlignment( Pos.CENTER );
+        line3.setAlignment( Pos.CENTER );
+        line4.setAlignment( Pos.CENTER );
 
-        studentName = new Label();
-        studentName.setText( "Student Name" );
-        scheduleButton = new Button("Schedule Appointment");
-        viewAppointments = new Button("View Appointments");
+        facultyName = new Label();
+        if (faculty != null)
+            facultyName.setText( faculty.getUsername() );
+        else
+            facultyName.setText( "NULL FACULTY" );
+        removeTutor = new Button("Remove Tutor");
         backButton = new Button("Log out");
         backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
 
-        line1.getChildren().add(studentName);
-        line2.getChildren().add(scheduleButton);
-        line3.getChildren().add(viewAppointments);
-        line4.getChildren().add(backButton);
+        line1.getChildren().add(facultyName);
+        line2.getChildren().add(removeTutor);
+        line3.getChildren().add(backButton);
 
         root.getChildren().add( line1 );
         root.getChildren().add( line2 );
@@ -72,8 +72,8 @@ public class StudentHomeScreen implements AppScene {
         return new Scene( root, 400, 300 );
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
-        studentName.setText( this.student.getUsername() );
+
+    public void setFaculty(Faculty f) {
+        this.faculty = f;
     }
 }
