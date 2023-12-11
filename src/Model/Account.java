@@ -14,6 +14,14 @@ abstract public class Account {
 
     private Integer id;
 
+    Account() {
+
+    }
+
+    Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     // Gets Username of Account
     public String getUsername() {
