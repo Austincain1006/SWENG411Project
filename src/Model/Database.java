@@ -26,6 +26,7 @@ public class Database {
             throw new AccountNotFound();
     }
 
+    //Checks the entered username against DB
     public static boolean correctLogin(String username, String password){
         for (int i = 0; i < numAccounts; i++) {
             if (database.get(i).getUsername().equals( username ))
@@ -37,6 +38,7 @@ public class Database {
         return false;
     }
 
+    //Get Username from the database
     public static Account searchUsername(String username) throws AccountNotFound{
         for (int i = 0; i < numAccounts; i++) {
             if (database.get(i).getUsername().equals( username ))
