@@ -1,6 +1,7 @@
 package view;
 import Model.Database;
 import Model.Faculty;
+import Model.Student;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
@@ -17,6 +18,7 @@ public class GUI extends Application {
     private static ViewAccount ViewAccountScene;
     private static StudentHomeScreen studentHomeScreen;
     private static FacultyHomeScreen facultyHomeScreen;
+
 
     /**
      * Starts the Program and Launches JavaFX Stage.
@@ -37,6 +39,8 @@ public class GUI extends Application {
     public void initialize(){
         DB = new Database();
         Database.addAccount( getDefaultFaculty() );
+        Database.addAccount( getDefaultStudent() );
+
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
         ViewAccountScene = new ViewAccount();
@@ -53,6 +57,17 @@ public class GUI extends Application {
         f.setUsername("ruth");
         f.setPassword("1234");
         return f;
+    }
+
+    /**
+     * Gets Default Student for debugging
+     * @return Faculty Object
+     */
+    private Student getDefaultStudent() {
+        Student s = new Student();
+        s.setUsername("austin");
+        s.setPassword("1234");
+        return s;
     }
 
     /**
