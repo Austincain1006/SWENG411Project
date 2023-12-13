@@ -14,14 +14,9 @@ import javafx.scene.layout.VBox;
  */
 public class StudentHomeScreen implements AppScene {
    private VBox root;
-   private HBox line1;
-   private HBox line2;
-   private HBox line3;
-   private HBox line4;
+   private HBox line1, line2, line3, line4;
    private Label studentName;
-   private Button backButton;
-   private Button scheduleButton;
-   private Button viewAppointments;
+   private Button backButton, scheduleButton, viewAppointments;
    private Student student;
 
     /**

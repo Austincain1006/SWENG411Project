@@ -27,9 +27,7 @@ public class LogInScene implements AppScene {
    private Button registerButton;
    private Button loginButton;
 
-    /**
-     * Default Contructor for LogInScene
-     */
+    // Default Contructor for LogInScene
    LogInScene(){
        loginLabel = new Label( "Please Log In ");
        usernameLabel = new Label( "Enter Username: ");
@@ -39,17 +37,16 @@ public class LogInScene implements AppScene {
        passwordField = new TextField();
 
        registerButton = new Button( "Register" );
-       registerButton.setOnAction( (event -> GUI.setScene( GUI.getRegisterUserScene() )) );
+       registerButton.setOnAction( (event -> {
+           GUI.getRegisterUserScene().setCreatingUser(true);
+           GUI.setScene(GUI.getRegisterUserScene());
+       }) );
 
        loginButton = new Button( "Log In");
        loginButton.setOnAction( new HandleLogInEvent() );
 
    }
 
-    /**
-     * Builds and Returns the LogInScene
-     * @return Scene to be Displayed
-     */
     @Override
     public Scene makeScene() {
         root = new VBox();
@@ -83,6 +80,12 @@ public class LogInScene implements AppScene {
         return new Scene( root, 400, 300 );
     }
 
+    // Empty Text Fields
+    public void clearTextFields() {
+        usernameField.setText("");
+        passwordField.setText("");
+    }
+
     public TextField getUsernameField(){
         return usernameField;
     }
@@ -91,8 +94,5 @@ public class LogInScene implements AppScene {
         return passwordField;
     }
 
-    public void clearTextFields() {
-        usernameField.setText("");
-        passwordField.setText("");
-    }
+
 }

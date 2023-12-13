@@ -8,8 +8,9 @@ import view.GUI;
 import view.SetAvailabilityScreen;
 
 /**
- * HandleLogInEvent.java
- * Event Handler for Logging In
+ * SubmitTimeEvent.java
+ * Takes in user input for set availability scene and updates tutor data
+ * @author Austin Cain
  */
 public class SubmitTimeEvent implements EventHandler<ActionEvent> {
     private SetAvailabilityScreen scene;

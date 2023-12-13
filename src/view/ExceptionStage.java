@@ -11,6 +11,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * ExceptionStage.java
+ * Displays a Pop-Up Window to Display Errors
+ * @author Austin Cain
+ */
 public class ExceptionStage {
     private Stage exceptionStage;
     private Label exceptionLabel;
@@ -35,6 +40,7 @@ public class ExceptionStage {
         exceptionStage.show( );
     }
 
+    // Display Text Appropriate for Error Type
     public void setExceptionLabel( Exception e) {
         if (e instanceof MissingFieldException)
             exceptionLabel = new Label("Empty input field. Please fill in all fields.");

@@ -9,6 +9,11 @@ import view.SetSubjectsScreen;
 
 import java.util.concurrent.ExecutionException;
 
+/**
+ * AddSubjectEvent.java
+ * Listener for when User selects Add Subject
+ * @author Austin Cain
+ */
 public class AddSubjectEvent implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
