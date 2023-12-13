@@ -50,4 +50,22 @@ public class DateTime {
     public int getMinutes() {
         return minutes;
     }
+
+    public String printString(){
+        String result = "";
+
+        Integer years, month, day, hours, minutes;
+        years = this.year;
+        month = this.month;
+        day = this.day;
+        hours = this.hours;
+        minutes = this.minutes;
+
+        result += month.toString() + " ";
+        result += day.toString() + ", ";
+        result += years.toString() + " @ ";
+        result += hours.toString() + ":" + minutes.toString();
+
+        return result;
+    }
 }

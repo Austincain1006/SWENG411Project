@@ -51,11 +51,22 @@ public class StudentHomeScreen implements AppScene {
         root.setAlignment( Pos.CENTER );
         line1.setAlignment( Pos.CENTER );
         line2.setAlignment( Pos.CENTER );
+        line3.setAlignment( Pos.CENTER );
+        line4.setAlignment( Pos.CENTER );
 
         studentName = new Label();
         studentName.setText( "Student Name" );
         scheduleButton = new Button("Schedule Appointment");
+        scheduleButton.setOnAction( event -> {
+            GUI.getCreateAppointmentScreen().setStudent( this.student );
+            GUI.setScene( GUI.getCreateAppointmentScreen() );
+        });
         viewAppointments = new Button("View Appointments");
+        viewAppointments.setOnAction( event -> {
+            GUI.getViewAppointmentsScreen().setStudent( this.student );
+            GUI.setScene( GUI.getViewAppointmentsScreen() );
+        });
+
         backButton = new Button("Log out");
         backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
 

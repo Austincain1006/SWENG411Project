@@ -1,5 +1,6 @@
 package view;
 
+import Model.Student;
 import controller.ScheduleAppointmentEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class CreateAppointmentScreen implements AppScene{
     private ComboBox tutor, subject;
     private TextField comments;
     private Label dateLabel;
+    private Student student;
 
 
 
@@ -205,6 +207,14 @@ public class CreateAppointmentScreen implements AppScene{
 
     public ComboBox getMinutes() {
         return minutes;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 
