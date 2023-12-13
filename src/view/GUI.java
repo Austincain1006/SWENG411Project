@@ -18,6 +18,7 @@ public class GUI extends Application {
     private static ViewAccount ViewAccountScene;
     private static StudentHomeScreen studentHomeScreen;
     private static FacultyHomeScreen facultyHomeScreen;
+    private static CreateAppointmentScreen createAppointmentScreen;
 
 
     /**
@@ -29,6 +30,7 @@ public class GUI extends Application {
         initialize();
         stage = primaryStage;
         stage.setScene( logInScene.makeScene() );
+        //stage.setScene( createAppointmentScreen.makeScene() ); // Manually Set Scene for Debugging
         stage.setTitle("TutorHelper");
         stage.show();
     }
@@ -46,6 +48,7 @@ public class GUI extends Application {
         ViewAccountScene = new ViewAccount();
         studentHomeScreen = new StudentHomeScreen();
         facultyHomeScreen = new FacultyHomeScreen();
+        createAppointmentScreen = new CreateAppointmentScreen();
     }
 
     /**
