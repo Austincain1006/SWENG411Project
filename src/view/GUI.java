@@ -23,6 +23,7 @@ public class GUI extends Application {
     private static ViewAppointmentsScreen viewAppointmentsScreen;
     private static TutorHomeScreen tutorHomeScreen;
     private static SetAvailabilityScreen setAvailabilityScreen;
+    private static SetSubjectsScreen setSubjectsScreen;
 
 
     /**
@@ -56,6 +57,7 @@ public class GUI extends Application {
         viewAppointmentsScreen = new ViewAppointmentsScreen();
         tutorHomeScreen = new TutorHomeScreen();
         setAvailabilityScreen = new SetAvailabilityScreen();
+        setSubjectsScreen = new SetSubjectsScreen();
     }
 
     /**
@@ -141,5 +143,9 @@ public class GUI extends Application {
 
     public static SetAvailabilityScreen getSetAvailabilityScreen() {
         return setAvailabilityScreen;
+    }
+
+    public static SetSubjectsScreen getSetSubjectsScreen(){
+        return setSubjectsScreen;
     }
 }
