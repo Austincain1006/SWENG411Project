@@ -30,7 +30,7 @@ public class GUI extends Application {
         initialize();
         stage = primaryStage;
         stage.setScene( logInScene.makeScene() );
-        //stage.setScene( createAppointmentScreen.makeScene() ); // Manually Set Scene for Debugging
+        stage.setScene( facultyHomeScreen.makeScene() ); // Manually Set Scene for Debugging
         stage.setTitle("TutorHelper");
         stage.show();
     }

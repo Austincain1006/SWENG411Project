@@ -2,12 +2,18 @@ package view;
 import Model.Account;
 import Model.Faculty;
 import Model.Student;
+import Model.Tutor;
+import controller.RemoveTutorEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * LogInScene.java
@@ -23,6 +29,8 @@ public class FacultyHomeScreen implements AppScene {
    private Label facultyName;
    private Button backButton;
    private Button removeTutor;
+
+    private ComboBox removeTutorComboBox;
    private Faculty faculty;
 
     /**
@@ -56,11 +64,17 @@ public class FacultyHomeScreen implements AppScene {
             facultyName.setText( faculty.getUsername() );
         else
             facultyName.setText( "NULL FACULTY" );
+
         removeTutor = new Button("Remove Tutor");
+        removeTutor.setOnAction( new RemoveTutorEvent() );
+        removeTutorComboBox = new ComboBox();
+        removeTutorComboBox.getItems().addAll( getTutors() );
+
         backButton = new Button("Log out");
         backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
 
         line1.getChildren().add(facultyName);
+        line2.getChildren().add(removeTutorComboBox);
         line2.getChildren().add(removeTutor);
         line3.getChildren().add(backButton);
 
@@ -75,5 +89,24 @@ public class FacultyHomeScreen implements AppScene {
 
     public void setFaculty(Faculty f) {
         this.faculty = f;
+    }
+
+    private ArrayList<String> getTutors() {
+        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Tutor> tutors = new ArrayList<>();
+
+        // Get ALL Tutors from DB
+            // ... ADD DB CODE HERE
+
+        // Get Names of Tutors
+        Iterator<Tutor> iter = tutors.iterator();
+        while (iter.hasNext())
+            result.add( iter.next().getUsername() );
+
+        return result;
+    }
+
+    public ComboBox getRemoveTutorComboBox() {
+        return removeTutorComboBox;
     }
 }
