@@ -5,6 +5,7 @@
  */
 
 import java.sql.*;
+import java.util.ArrayList;
 
 //Query methods
 public class MySqlDB {
@@ -57,20 +58,24 @@ public class MySqlDB {
     }
 
     //Return user's appointments from db
-    public dbAppointment getAppointment(User myUser) {
+    public ArrayList<dbAppointment> getAppointment(User myUser) {
 
-        dbAppointment myAppt = null;
+        ArrayList<dbAppointment> myApptList = new ArrayList<>();
+
 
         //Query to grab all appointments from the appointments table where the student matches the current user
-        String query = String.format("SELECT APPOINTMENT_NUMBER FROM APPOINTMENTS WHERE Student = `%s`", myUser.userID);
+        String query = "SELECT * FROM APPOINTMENTS WHERE Student = ? ORDER BY Date ASC";
 
         try {
-            Statement stmt = db.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement preparedStatement = db.prepareStatement(query);
+            preparedStatement.setString(1,myUser.userID);
+
 
             //Query Statement
-            ResultSet rs = stmt.executeQuery(query);
+            preparedStatement.execute();
+
+
+            ResultSet rs = preparedStatement.getResultSet();
 
             //Desired information
             while (rs.next()) {
@@ -82,14 +87,14 @@ public class MySqlDB {
                 String tutor = rs.getString("Tutor");
                 String student = rs.getString("Student");
 
-                myAppt = new dbAppointment(appointmentNumber,date,time,location,subject,tutor,student);
+                myApptList.add(new dbAppointment(appointmentNumber,date,time,location,subject,tutor,student));
             }
         }catch (SQLException e) { //Exception in case of no connection
             System.err.println(e);
         }
 
         //Returns the appointment object
-        return myAppt;
+        return myApptList;
     }
 
     /**
@@ -101,7 +106,6 @@ public class MySqlDB {
     public void addUser(User myNewUser) {
 
         //Query to inserts the new user information into the DB
-
         String query = "INSERT INTO USERS (USER_ID,Password,Email,Name,UserType)" +
                 "VALUES (?,?,?,?,?)";
 
@@ -123,17 +127,21 @@ public class MySqlDB {
     //Returns the user information of the user credentials given
     public User getLogin(String argPassword, String argUsername) {
 
+        //Create temp user object to store retrieved data
         User myUser = null;
 
-        String query = String.format("SELECT Password FROM USERS WHERE USER_ID = `%s` AND Password = `%s`", argUsername, argPassword);
+        //Query to get user information based on the given user/pass
+        String query = "SELECT * FROM USERS WHERE USER_ID = ? AND Password = ?";
 
         try {
-            Statement stmt = db.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement preparedStatement = db.prepareStatement(query);
+            preparedStatement.setString(1,argUsername);
+            preparedStatement.setString(2,argPassword);
 
             //Query Statement
-            ResultSet rs = stmt.executeQuery(query);
+            preparedStatement.execute();
+
+            ResultSet rs = preparedStatement.getResultSet();
 
             //Desired information
             while (rs.next()) {
@@ -162,19 +170,20 @@ public class MySqlDB {
         db.init();
 
         //Create User
+        User peter = new User("plm5256","password","plm5256@psu.edu","Peter Mica","Student");
 
-        dbAppointment myNewAppt = new dbAppointment(2,
-                12132023,
-                2400,
-                "Burke 001",
-                "SWENG 411",
-                "acc5929",
-                "plm5256");
+        db.getAppointment(peter);
 
-        //Append db
-        db.addAppointment(myNewAppt);
+        ArrayList<dbAppointment> apptList = db.getAppointment(peter);
 
-        //Extract primitives as needed (In this case, the user's name)
-        //System.out.println(tempUser.name);
+        //Get size of apptList
+        int size = apptList.size();
+
+        //Iterate over arraylist of appts
+        for (int i = 0; i < size; i++) {
+            //Print the subject of each appointment
+            System.out.println("Subject:" + apptList.get(i).date);
+        }
+
     }
 }
