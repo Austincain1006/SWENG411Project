@@ -72,7 +72,7 @@ public class TutorHomeScreen implements AppScene {
         setAvailability.setOnAction( event -> GUI.setScene( GUI.getSetAvailabilityScreen() ) );
 
         setSubjects = new Button("Set Subjects");
-        //setSubjects.setOnAction( );
+        setSubjects.setOnAction( event -> GUI.setScene( GUI.getSetSubjectsScreen() ));
 
         line1.getChildren().add(tutorName);
         line2.getChildren().add(viewAppointments);
