@@ -1,5 +1,6 @@
 package view;
 
+import Model.Account;
 import Model.Appointment;
 import Model.Student;
 import controller.ScheduleAppointmentEvent;
@@ -22,7 +23,7 @@ public class ViewAppointmentsScreen implements AppScene{
     private ComboBox selectAppointment;
     private ArrayList<Appointment> appointments;
     private Label date, tutor, subject, location, comments;
-    private Student student;
+    private Account account;
     private Button backButton;
 
     @Override
@@ -67,7 +68,12 @@ public class ViewAppointmentsScreen implements AppScene{
         }
 
         backButton = new Button("Back");
-        backButton.setOnAction( event -> GUI.setScene( GUI.getStudentHomeScreen() ));
+        backButton.setOnAction( event -> {
+            if (this.account instanceof Student)
+                GUI.setScene(GUI.getStudentHomeScreen());
+            else
+                GUI.setScene(GUI.getTutorHomeScreen());
+        });
 
 
         line1.getChildren().add(selectAppt);
@@ -91,14 +97,14 @@ public class ViewAppointmentsScreen implements AppScene{
         return new Scene(root, 400, 300 );
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setAccount(Account acc) {
+        this.account = acc;
     }
 
     private ArrayList<Appointment> getAppointments(){
         ArrayList<Appointment> results = new ArrayList<>();
 
-        // Get Appointments from Database
+        // Get Appointments from Database tied to this account
 
         return results;
     }

@@ -2,6 +2,7 @@ package view;
 import Model.Database;
 import Model.Faculty;
 import Model.Student;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
@@ -20,6 +21,7 @@ public class GUI extends Application {
     private static FacultyHomeScreen facultyHomeScreen;
     private static CreateAppointmentScreen createAppointmentScreen;
     private static ViewAppointmentsScreen viewAppointmentsScreen;
+    private static TutorHomeScreen tutorHomeScreen;
 
 
     /**
@@ -31,7 +33,7 @@ public class GUI extends Application {
         initialize();
         stage = primaryStage;
         stage.setScene( logInScene.makeScene() );
-        //stage.setScene( studentHomeScreen.makeScene() ); // Manually Set Scene for Debugging
+        stage.setScene( tutorHomeScreen.makeScene() ); // Manually Set Scene for Debugging
         stage.setTitle("TutorHelper");
         stage.show();
     }
@@ -51,6 +53,7 @@ public class GUI extends Application {
         facultyHomeScreen = new FacultyHomeScreen();
         createAppointmentScreen = new CreateAppointmentScreen();
         viewAppointmentsScreen = new ViewAppointmentsScreen();
+        tutorHomeScreen = new TutorHomeScreen();
     }
 
     /**
@@ -105,6 +108,7 @@ public class GUI extends Application {
         eStage.makeScene( e );
     }
 
+
     public static ViewAccount getViewAccountScene(){
         return ViewAccountScene;
     }
@@ -127,5 +131,9 @@ public class GUI extends Application {
 
     public static ViewAppointmentsScreen getViewAppointmentsScreen() {
         return viewAppointmentsScreen;
+    }
+
+    public static TutorHomeScreen getTutorHomeScreen() {
+        return tutorHomeScreen;
     }
 }
