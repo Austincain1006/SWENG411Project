@@ -2,8 +2,13 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * Appointment.java
+ * Represents an appointment between 1 tutor and 1
+ * @author Austin Cain
+ */
 public class Appointment {
-    private ArrayList<Student> students;
+    private Student student;
     private Tutor tutor;
     private DateTime dateTime;
     private String location;
@@ -11,9 +16,9 @@ public class Appointment {
     private String comments;
 
 
-    Appointment(Tutor t, ArrayList<Student> s, DateTime d, String loc) {
+    Appointment(Tutor t, Student s, DateTime d, String loc) {
         tutor = t;
-        students = s;
+        student = s;
         dateTime = d;
         location = loc;
     }
@@ -50,12 +55,12 @@ public class Appointment {
         this.subject = subject;
     }
 
-    public ArrayList<Student> getStudents() {
-        return students;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public String getComments(){

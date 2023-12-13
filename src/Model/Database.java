@@ -3,6 +3,11 @@ package Model;
 import Model.Exceptions.AccountNotFoundException;
 import java.util.HashMap;
 
+/**
+ * Database.java
+ * Represents the Database for the program. Hopefully to be replaced with a proper mySQL database.
+ * @author Austin Cain
+ */
 public class Database {
     private static HashMap<Integer, Account> database;
     private static Integer numAccounts;
@@ -12,12 +17,14 @@ public class Database {
         numAccounts = 0;
     }
 
+    // Add New Account to Database
     public static Integer addAccount(Account a){
         database.put(numAccounts, a);
         a.setID(numAccounts);
         return numAccounts++;
     }
 
+    // Pull Account from Database via Integer ID
     public static Account getAccount(Integer i) throws AccountNotFoundException {
         System.out.println(database);
         if (database.get( i ) != null)

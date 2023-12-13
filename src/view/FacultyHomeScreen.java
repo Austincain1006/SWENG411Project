@@ -22,22 +22,13 @@ import java.util.Iterator;
  */
 public class FacultyHomeScreen implements AppScene {
    private VBox root;
-   private HBox line1;
-   private HBox line2;
-   private HBox line3;
-   private HBox line4;
-   private HBox linex;
+   private HBox line1, line2, line3, line4, linex;
    private Label facultyName;
-   private Button backButton;
-   private Button removeTutor;
-   private Button addTutor;
-
-    private ComboBox removeTutorComboBox;
+   private Button backButton, removeTutor, addTutor;
+   private ComboBox removeTutorComboBox;
    private Faculty faculty;
 
-    /**
-     * Default Contructor for LogInScene
-     */
+   //Default Contructor for LogInScene
    FacultyHomeScreen(){
        backButton = new Button( "Log out" );
        backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ) );
@@ -98,17 +89,13 @@ public class FacultyHomeScreen implements AppScene {
         return new Scene( root, 400, 300 );
     }
 
-
-    public void setFaculty(Faculty f) {
-        this.faculty = f;
-    }
-
+    // Query Database to get List of All Tutors
     private ArrayList<String> getTutors() {
         ArrayList<String> result = new ArrayList<>();
         ArrayList<Tutor> tutors = new ArrayList<>();
 
         // Get ALL Tutors from DB
-            // ... ADD DB CODE HERE
+        // ... ADD DB CODE HERE
 
         // Get Names of Tutors
         Iterator<Tutor> iter = tutors.iterator();
@@ -116,6 +103,10 @@ public class FacultyHomeScreen implements AppScene {
             result.add( iter.next().getUsername() );
 
         return result;
+    }
+
+    public void setFaculty(Faculty f) {
+        this.faculty = f;
     }
 
     public ComboBox getRemoveTutorComboBox() {

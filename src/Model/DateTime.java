@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * DateTime.java
+ * Represents a Time and Date
+ * @author Austin Cain
+ */
 public class DateTime {
     private int month;
     private int day;
@@ -31,6 +36,26 @@ public class DateTime {
         this.minutes = minutes;
     }
 
+    // Prints the Time and Date in a formatted String (e.g. May 1, 2023 @ 16:30)
+    public String printString(){
+        String result = "";
+
+        Integer years, month, day, hours, minutes;
+        years = this.year;
+        month = this.month;
+        day = this.day;
+        hours = this.hours;
+        minutes = this.minutes;
+
+        result += month.toString() + " ";
+        result += day.toString() + ", ";
+        result += years.toString() + " @ ";
+        result += hours.toString() + ":" + minutes.toString();
+
+        return result;
+    }
+
+
     public int getYear(){
         return this.year;
     }
@@ -49,23 +74,5 @@ public class DateTime {
 
     public int getMinutes() {
         return minutes;
-    }
-
-    public String printString(){
-        String result = "";
-
-        Integer years, month, day, hours, minutes;
-        years = this.year;
-        month = this.month;
-        day = this.day;
-        hours = this.hours;
-        minutes = this.minutes;
-
-        result += month.toString() + " ";
-        result += day.toString() + ", ";
-        result += years.toString() + " @ ";
-        result += hours.toString() + ":" + minutes.toString();
-
-        return result;
     }
 }

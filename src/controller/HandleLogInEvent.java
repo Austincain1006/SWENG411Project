@@ -28,6 +28,10 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
 
     }
 
+    /**
+     * Logs user into account
+     * @throws Exception
+     */
     private void login() throws Exception {
         String username = loginscene.getUsernameField().getText();
         String password = loginscene.getPasswordField().getText();
@@ -43,8 +47,8 @@ public class HandleLogInEvent implements EventHandler<ActionEvent> {
                 GUI.getStudentHomeScreen().setStudent( (Student)account );
                 GUI.setScene(GUI.getStudentHomeScreen());
             } else if (account instanceof Tutor) {
-                GUI.getViewAccountScene().setAccount( account );
-                GUI.setScene(GUI.getViewAccountScene());
+                GUI.getTutorHomeScreen().setTutor( (Tutor)account );
+                GUI.setScene(GUI.getTutorHomeScreen());
             } else if (account instanceof Faculty) {
                 GUI.getFacultyHomeScreen().setFaculty( (Faculty)account );
                 GUI.setScene(GUI.getFacultyHomeScreen());

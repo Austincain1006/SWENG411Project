@@ -12,6 +12,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * SetAvailabilityScreen.java
+ * Screen that Allows Tutor User to Add Available Times
+ * @author Austin Cain
+ */
 public class SetAvailabilityScreen implements AppScene{
     private VBox root;
     private HBox line1, line2, line3, line4, line5, line6;

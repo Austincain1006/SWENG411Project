@@ -15,16 +15,9 @@ import javafx.scene.layout.VBox;
  */
 public class TutorHomeScreen implements AppScene {
    private VBox root;
-   private HBox line1;
-   private HBox line2;
-   private HBox line3;
-   private HBox line4;
-   private HBox line5;
+   private HBox line1, line2, line3, line4, line5;
    private Tutor tutor;
-   private Button backButton;
-   private Button viewAppointments;
-   private Button setAvailability;
-   private Button setSubjects;
+   private Button backButton, viewAppointments, setAvailability, setSubjects;
    private Label tutorName;
 
 
@@ -64,7 +57,7 @@ public class TutorHomeScreen implements AppScene {
 
         viewAppointments = new Button("View Appointments");
         viewAppointments.setOnAction( event -> {
-            GUI.getViewAccountScene().setAccount( this.tutor );
+            //GUI.getViewAccountScene().setAccount( this.tutor );
             GUI.setScene( GUI.getViewAppointmentsScreen() );
         });
 

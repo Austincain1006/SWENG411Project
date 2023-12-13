@@ -10,15 +10,18 @@ import view.GUI;
 import view.LogInScene;
 
 /**
- * HandleLogInEvent.java
- * Event Handler for Logging In
+ * RemoveTutorEvent.java
+ * Removes a specified tutor from database
+ * @author Austin Cain
  */
 public class RemoveTutorEvent implements EventHandler<ActionEvent> {
     private FacultyHomeScreen facultyHomeScreen;
     private Account account;
     @Override
     public void handle(ActionEvent event) {
+        System.out.println("Remove Tutor Event Called");
 
+        // Remove Tutor from DB
 
     }
 

@@ -3,7 +3,6 @@ package view;
 import Model.Tutor;
 import controller.AddSubjectEvent;
 import controller.RemoveSubjectEvent;
-import controller.SubmitTimeEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,10 +10,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * SetSubjectsScreen.java
+ * Scene to let Tutors set what Subjects they Teach
+ * @author Austin Cain
+ */
 public class SetSubjectsScreen implements AppScene{
     private VBox root;
     private HBox line1, line2, line3, line4;

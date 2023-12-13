@@ -16,7 +16,6 @@ public class GUI extends Application {
     private static LogInScene logInScene;
     private static RegisterUserScene registerUserScene;
     private static Database DB;
-    private static ViewAccount ViewAccountScene;
     private static StudentHomeScreen studentHomeScreen;
     private static FacultyHomeScreen facultyHomeScreen;
     private static CreateAppointmentScreen createAppointmentScreen;
@@ -26,10 +25,7 @@ public class GUI extends Application {
     private static SetSubjectsScreen setSubjectsScreen;
 
 
-    /**
-     * Starts the Program and Launches JavaFX Stage.
-     * Default Scene is LogInScene
-     */
+    // Starts the Program and Launches JavaFX Stage. Default Scene is LogInScene.
     @Override
     public void start(Stage primaryStage) throws Exception {
         initialize();
@@ -40,17 +36,12 @@ public class GUI extends Application {
         stage.show();
     }
 
-    /**
-     * Initializes all Scenes to be Used in GUI
-     */
+    //Initializes all Scenes to be Used in GUI
     public void initialize(){
         DB = new Database();
         Database.addAccount( getDefaultFaculty() );
-        Database.addAccount( getDefaultStudent() );
-
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
-        ViewAccountScene = new ViewAccount();
         studentHomeScreen = new StudentHomeScreen();
         facultyHomeScreen = new FacultyHomeScreen();
         createAppointmentScreen = new CreateAppointmentScreen();
@@ -60,10 +51,7 @@ public class GUI extends Application {
         setSubjectsScreen = new SetSubjectsScreen();
     }
 
-    /**
-     * Gets Default Faculty Member to manage Tutoring
-     * @return Faculty Object
-     */
+    // Gets Default Faculty Member to manage Tutoring
     private Faculty getDefaultFaculty() {
         Faculty f = new Faculty();
         f.setUsername("ruth");
@@ -71,51 +59,25 @@ public class GUI extends Application {
         return f;
     }
 
-    /**
-     * Gets Default Student for debugging
-     * @return Faculty Object
-     */
-    private Student getDefaultStudent() {
-        Student s = new Student();
-        s.setUsername("austin");
-        s.setPassword("1234");
-        return s;
-    }
-
-    /**
-     * Changes the Displayed Scene on GUI
-     * @param newScene Scene to be Displayed
-     */
+    // Changes the Displayed Scene on GUI
     public static void setScene(AppScene newScene) {
         stage.setScene( newScene.makeScene() );
     }
 
-    /**
-     * Gets Register User Scene
-     * @return scene abject
-     */
+    // Display a Pop-Up Error to Screen
+    public static void popupError( Exception e ) {
+        ExceptionStage eStage = new ExceptionStage();
+        eStage.makeScene( e );
+    }
     public static RegisterUserScene getRegisterUserScene() {
         return registerUserScene;
     }
 
-    /**
-     * Gets Register User Scene
-     * @return scene abject
-     */
     public static LogInScene getLogInScene() {
         //logInScene.clearTextFields(); // for some reason this line just breaks everything IDK why
         return logInScene;
     }
 
-    public static void popupError( Exception e ) {
-        ExceptionStage eStage = new ExceptionStage();
-        eStage.makeScene( e );
-    }
-
-
-    public static ViewAccount getViewAccountScene(){
-        return ViewAccountScene;
-    }
 
     public static Database getDB() {
         return DB;

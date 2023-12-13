@@ -13,6 +13,11 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * CreateAppointmentScreen.java
+ * Screen from which User Creates Appointments
+ * @author Austin Cain
+ */
 public class CreateAppointmentScreen implements AppScene{
     private VBox root;
     private HBox line1, line2, line3, line4, line5, line6;
@@ -22,8 +27,6 @@ public class CreateAppointmentScreen implements AppScene{
     private TextField comments;
     private Label dateLabel;
     private Student student;
-
-
 
     private ComboBox day, month, year;
     private Label timeLabel;
@@ -147,6 +150,7 @@ public class CreateAppointmentScreen implements AppScene{
         return new Scene(root, 400, 300 );
     }
 
+    // Gets Amount of Days in a Month as a List of Strings
     private ArrayList<String> getDays(String month) {
         ArrayList<String> result = new ArrayList<>();
 

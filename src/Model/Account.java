@@ -1,17 +1,13 @@
 package Model;
 
+/**
+ * Account.java
+ * Abstract class to represent generic accounts. To be used in Inheritance-based polymorphism between tutors, users, and faculty
+ * @author Austin Cain
+ */
 abstract public class Account {
     protected String username;
     protected String password;
-
-    public Integer getID() {
-        return id;
-    }
-
-    public void setID(Integer id) {
-        this.id = id;
-    }
-
     private Integer id;
 
     Account() {
@@ -41,5 +37,15 @@ abstract public class Account {
     // Gets Username of Account
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // Set ID of Account
+    public void setID(Integer id) {
+        this.id = id;
+    }
+
+    // Get ID of Account
+    public Integer getID() {
+        return id;
     }
 }

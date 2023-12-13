@@ -16,6 +16,10 @@ import javafx.scene.layout.VBox;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * ViewAppointmentsScreen.java
+ * Displays Information about Selected Appointment that a Student or Tutor has
+ */
 public class ViewAppointmentsScreen implements AppScene{
     private VBox root;
     private HBox line1, line2, line3, line4, line5, line6, line7;
@@ -28,8 +32,6 @@ public class ViewAppointmentsScreen implements AppScene{
 
     @Override
     public Scene makeScene() {
-
-        System.out.println( "MAKING SCENE" );
         root = new VBox();
         line1 = new HBox();
         line2 = new HBox();

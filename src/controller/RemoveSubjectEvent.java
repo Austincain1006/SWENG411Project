@@ -7,6 +7,11 @@ import javafx.event.EventHandler;
 import view.GUI;
 import view.SetSubjectsScreen;
 
+/**
+ * RemoveSubjectEvent.java
+ * Listener Class for when Tutor User Selects to Remove a designated Subject
+ * @author Austin Cain
+ */
 public class RemoveSubjectEvent implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {

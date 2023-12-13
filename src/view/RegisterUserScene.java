@@ -9,24 +9,12 @@ import javafx.scene.layout.VBox;
 
 public class RegisterUserScene implements AppScene {
     private VBox root;
-    private HBox line0;
-    private HBox line1;
-    private HBox line2;
-    private HBox line3;
-    private HBox line4;
-    private Label nameLabel;
-    private Label passwordLabel;
-    private TextField nameField;
-    private TextField passwordTextField;
-    private Button backButton;
-    private Button enterButton;
+    private HBox line0, line1, line2, line3, line4;
+    private Label nameLabel, passwordLabel, accountLabel;
+    private TextField nameField, passwordTextField;
+    private Button backButton, enterButton;
     private boolean isCreatingUser = true;
-    private Label accountLabel;
 
-
-    /**
-     * Default Contructor for LogInScene
-     */
     RegisterUserScene(){
         ToggleGroup typeGroup = new ToggleGroup();
         accountLabel = new Label();
@@ -36,15 +24,10 @@ public class RegisterUserScene implements AppScene {
         passwordLabel = new Label("Password: ");
         passwordTextField = new TextField();
         backButton = new Button("Back");
-        backButton.setOnAction( (event -> GUI.setScene( GUI.getLogInScene() )) );
         enterButton = new Button("Enter");
         enterButton.setOnAction( new RegisterNewAccountEvent() );
     }
 
-    /**
-     * Builds and Returns the LogInScene
-     * @return Scene to be Displayed
-     */
     @Override
     public Scene makeScene() {
         root = new VBox();
@@ -61,10 +44,16 @@ public class RegisterUserScene implements AppScene {
         line3.setAlignment( Pos.CENTER );
         line4.setAlignment( Pos.CENTER );
 
-        if (isCreatingUser)
+        if (isCreatingUser) {
             accountLabel.setText("User Registration");
-        else
+            backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
+        }
+        else {
             accountLabel.setText("Tutor Registration");
+            backButton.setOnAction( event -> GUI.setScene( GUI.getTutorHomeScreen() ));
+        }
+
+
 
         line0.getChildren().add(accountLabel);
 
@@ -92,10 +81,6 @@ public class RegisterUserScene implements AppScene {
 
     public TextField getPasswordTextField() {
         return passwordTextField;
-    }
-
-    public boolean isCreatingUser() {
-        return isCreatingUser;
     }
 
     public void setCreatingUser(boolean creatingUser) {

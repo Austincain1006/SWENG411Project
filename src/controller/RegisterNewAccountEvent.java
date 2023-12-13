@@ -8,6 +8,11 @@ import javafx.event.EventHandler;
 import view.GUI;
 import view.RegisterUserScene;
 
+/**
+ * RegisterNewAccountEvent.java
+ * Listener Class for when User selects to Register a New Account
+ * @author Austin Cain
+ */
 public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
     private RegisterUserScene registerScene;
     @Override
@@ -16,14 +21,22 @@ public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
 
         try {
             createAccount();
-            GUI.setScene( GUI.getLogInScene() );
+
+            if (registerScene.getIsCreatingUser())
+                GUI.setScene( GUI.getLogInScene() );
+            else
+                GUI.setScene( GUI.getFacultyHomeScreen() );
+
         } catch (MissingFieldException mfe) {
             GUI.popupError( mfe );
         }
 
     }
 
-
+    /**
+     * Creates an account from user input from register scene
+     * @throws MissingFieldException
+     */
     private void createAccount() throws MissingFieldException {
         if ( registerScene.getIsCreatingUser() == true ){
             // Make Student
