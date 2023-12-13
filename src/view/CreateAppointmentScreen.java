@@ -96,7 +96,7 @@ public class CreateAppointmentScreen implements AppScene{
 
         hours = new ComboBox();
 
-        for (int i = 1; i <= 24; i++)
+        for (int i = 0; i < 24; i++)
             hours.getItems().add(i);
         hours.getSelectionModel().select(11);
 

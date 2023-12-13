@@ -1,5 +1,6 @@
 package view;
 
+import Model.Exceptions.AccountNotFoundException;
 import Model.Exceptions.InvalidLoginException;
 import Model.Exceptions.MissingFieldException;
 import javafx.geometry.Pos;
@@ -35,16 +36,15 @@ public class ExceptionStage {
     }
 
     public void setExceptionLabel( Exception e) {
-        if (e instanceof MissingFieldException){
+        if (e instanceof MissingFieldException)
             exceptionLabel = new Label("Empty input field. Please fill in all fields.");
-        } if (e instanceof InvalidLoginException) {
-            exceptionLabel = new Label("Account not found. Please check your username and password.");
-        } else {
+        if (e instanceof InvalidLoginException)
+            exceptionLabel = new Label("Incorrect password or username. Please check your username and password.");
+        if (e instanceof AccountNotFoundException)
+            exceptionLabel = new Label("No Account Found");
+        else
             exceptionLabel = new Label( "Unknown error.");
-            System.out.println("e: "+e);
-            System.out.println( e.getCause() );
-            System.out.println( e.getMessage() );
-            System.out.println( e.toString() );
-        }
+
+        System.out.println(e);
     }
 }

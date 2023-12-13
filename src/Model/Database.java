@@ -1,6 +1,6 @@
 package Model;
 
-import Model.Exceptions.AccountNotFound;
+import Model.Exceptions.AccountNotFoundException;
 import java.util.HashMap;
 
 public class Database {
@@ -18,12 +18,12 @@ public class Database {
         return numAccounts++;
     }
 
-    public static Account getAccount(Integer i) throws AccountNotFound {
+    public static Account getAccount(Integer i) throws AccountNotFoundException {
         System.out.println(database);
         if (database.get( i ) != null)
             return database.get( i );
         else
-            throw new AccountNotFound();
+            throw new AccountNotFoundException();
     }
 
     //Checks the entered username against DB
@@ -39,12 +39,12 @@ public class Database {
     }
 
     //Get Username from the database
-    public static Account searchUsername(String username) throws AccountNotFound{
+    public static Account searchUsername(String username) throws AccountNotFoundException {
         for (int i = 0; i < numAccounts; i++) {
             if (database.get(i).getUsername().equals( username ))
                 return database.get(i);
         }
-        throw new AccountNotFound();
+        throw new AccountNotFoundException();
     }
 
 
