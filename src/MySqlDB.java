@@ -10,7 +10,10 @@ import java.sql.*;
 public class MySqlDB {
     Connection db;
 
-    //This function must be called before any use of queries to establish connection to the DB
+    /**
+     * This function must be called before any use of queries to establish connection to the DB
+     *
+     */
     public void init() {
         try {
             //Arguments for DB connection
@@ -21,6 +24,34 @@ public class MySqlDB {
             db = DriverManager.getConnection(jdbcURL, username, password);
 
         } catch (SQLException e) {  //Exception in case of no connection
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * Below two methods are the setters/getters for the appointments table
+     *
+     */
+
+    //Insert a new User
+    public void addAppointment(dbAppointment myNewAppointment) {
+
+        String query = "INSERT INTO APPOINTMENTS (APPOINTMENT_NUMBER,Date,Time,Location,Subject,Tutor,Student)" +
+                "VALUES (?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement preparedStatement = db.prepareStatement(query);
+            preparedStatement.setInt(1,myNewAppointment.appointmentNumber);
+            preparedStatement.setString(2,String.valueOf(myNewAppointment.date));
+            preparedStatement.setString(3,String.valueOf(myNewAppointment.time));
+            preparedStatement.setString(4,myNewAppointment.location);
+            preparedStatement.setString(5,myNewAppointment.subject);
+            preparedStatement.setString(6,myNewAppointment.tutor);
+            preparedStatement.setString(7,myNewAppointment.student);
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
@@ -43,7 +74,7 @@ public class MySqlDB {
 
             //Desired information
             while (rs.next()) {
-                String appointmentNumber = rs.getString("APPOINTMENT_NUMBER");
+                Integer appointmentNumber = rs.getInt("APPOINTMENT_NUMBER");
                 Integer date = rs.getInt("Date");
                 Integer time = rs.getInt("Time");
                 String location = rs.getString("Location");
@@ -59,6 +90,34 @@ public class MySqlDB {
 
         //Returns the appointment object
         return myAppt;
+    }
+
+    /**
+     * Below two methods are the setters/getters for the user table
+     *
+     */
+
+    //Insert a new User
+    public void addUser(User myNewUser) {
+
+        //Query to inserts the new user information into the DB
+
+        String query = "INSERT INTO USERS (USER_ID,Password,Email,Name,UserType)" +
+                "VALUES (?,?,?,?,?)";
+
+        try {
+            PreparedStatement preparedStatement = db.prepareStatement(query);
+            preparedStatement.setString(1,myNewUser.userID);
+            preparedStatement.setString(2,myNewUser.password);
+            preparedStatement.setString(3,myNewUser.email);
+            preparedStatement.setString(4,myNewUser.name);
+            preparedStatement.setString(5,myNewUser.userType);
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
     }
 
     //Returns the user information of the user credentials given
@@ -98,30 +157,24 @@ public class MySqlDB {
     //Main method for testing DB queries
     public static void main(String[] args) {
 
-        String jdbcURL = "jdbc:mysql://localhost:3306/411DB";
-        String username = "plm5256";
-        String password = "pass";
+        //Initialize DB
+        MySqlDB db = new MySqlDB();
+        db.init();
 
-        try {
-            //Class.forName("com.mysql.cj.jdbc.Driver");
+        //Create User
 
-            Connection con = DriverManager.getConnection(jdbcURL, username, password);
-            Statement stmt = con.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+        dbAppointment myNewAppt = new dbAppointment(2,
+                12132023,
+                2400,
+                "Burke 001",
+                "SWENG 411",
+                "acc5929",
+                "plm5256");
 
-            //Query Statement
-            ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS");
+        //Append db
+        db.addAppointment(myNewAppt);
 
-            //Desired information
-            while (rs.next()) {
-                String s = rs.getString("STUDENT_ID");
-                String s1 = rs.getString("Name");
-                System.out.println(s + s1);
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
-
-        }
+        //Extract primitives as needed (In this case, the user's name)
+        //System.out.println(tempUser.name);
     }
 }

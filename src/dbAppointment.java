@@ -3,10 +3,10 @@
  * @author Peter Mica
  * */
 public class dbAppointment {
-    String appointmentNumber, location, subject, tutor, student;
-    Integer date, time;
+    String location, subject, tutor, student;
+    Integer appointmentNumber, date, time;
 
-    public dbAppointment(String appointmentNumber, Integer date, Integer time, String location,
+    public dbAppointment(Integer appointmentNumber, Integer date, Integer time, String location,
                          String subject, String tutor, String student) {
         this.appointmentNumber = appointmentNumber;
         this.date = date;
