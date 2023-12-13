@@ -39,7 +39,10 @@ public class LogInScene implements AppScene {
        passwordField = new TextField();
 
        registerButton = new Button( "Register" );
-       registerButton.setOnAction( (event -> GUI.setScene( GUI.getRegisterUserScene() )) );
+       registerButton.setOnAction( (event -> {
+           GUI.getRegisterUserScene().setCreatingUser(true);
+           GUI.setScene(GUI.getRegisterUserScene());
+       }) );
 
        loginButton = new Button( "Log In");
        loginButton.setOnAction( new HandleLogInEvent() );

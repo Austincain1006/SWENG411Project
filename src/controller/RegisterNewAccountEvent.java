@@ -1,16 +1,14 @@
 package controller;
 
-import Model.Database;
 import Model.Exceptions.MissingFieldException;
 import Model.Student;
 import Model.Tutor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import view.GUI;
-import view.LogInScene;
 import view.RegisterUserScene;
 
-public class RegisterNewAccount implements EventHandler<ActionEvent> {
+public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
     private RegisterUserScene registerScene;
     @Override
     public void handle(ActionEvent event) {
@@ -27,7 +25,7 @@ public class RegisterNewAccount implements EventHandler<ActionEvent> {
 
 
     private void createAccount() throws MissingFieldException {
-        if ( registerScene.getUserButton().isSelected() ){
+        if ( registerScene.getIsCreatingUser() == true ){
             // Make Student
             Student newStudent = new Student();
 
@@ -45,7 +43,7 @@ public class RegisterNewAccount implements EventHandler<ActionEvent> {
 
             newStudent.setID( GUI.getDB().addAccount(newStudent) );
 
-        } else if ( registerScene.getTutorButton().isSelected() ) {
+        } else if ( registerScene.getIsCreatingUser() == false ) {
             // Make Tutor
             Tutor newTutor = new Tutor();
 

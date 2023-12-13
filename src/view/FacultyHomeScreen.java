@@ -26,9 +26,11 @@ public class FacultyHomeScreen implements AppScene {
    private HBox line2;
    private HBox line3;
    private HBox line4;
+   private HBox linex;
    private Label facultyName;
    private Button backButton;
    private Button removeTutor;
+   private Button addTutor;
 
     private ComboBox removeTutorComboBox;
    private Faculty faculty;
@@ -48,6 +50,7 @@ public class FacultyHomeScreen implements AppScene {
     @Override
     public Scene makeScene() {
         root = new VBox();
+        linex = new HBox();
         line1 = new HBox();
         line2 = new HBox();
         line3 = new HBox();
@@ -55,6 +58,7 @@ public class FacultyHomeScreen implements AppScene {
 
         root.setAlignment( Pos.CENTER );
         line1.setAlignment( Pos.CENTER );
+        linex.setAlignment( Pos.CENTER );
         line2.setAlignment( Pos.CENTER );
         line3.setAlignment( Pos.CENTER );
         line4.setAlignment( Pos.CENTER );
@@ -65,6 +69,12 @@ public class FacultyHomeScreen implements AppScene {
         else
             facultyName.setText( "NULL FACULTY" );
 
+        addTutor = new Button("Add Tutor");
+        addTutor.setOnAction(event -> {
+            GUI.getRegisterUserScene().setCreatingUser(false);
+            GUI.setScene(GUI.getRegisterUserScene());
+        });
+
         removeTutor = new Button("Remove Tutor");
         removeTutor.setOnAction( new RemoveTutorEvent() );
         removeTutorComboBox = new ComboBox();
@@ -74,11 +84,13 @@ public class FacultyHomeScreen implements AppScene {
         backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ));
 
         line1.getChildren().add(facultyName);
+        linex.getChildren().add(addTutor);
         line2.getChildren().add(removeTutorComboBox);
         line2.getChildren().add(removeTutor);
         line3.getChildren().add(backButton);
 
         root.getChildren().add( line1 );
+        root.getChildren().add( linex );
         root.getChildren().add( line2 );
         root.getChildren().add( line3 );
         root.getChildren().add( line4 );
