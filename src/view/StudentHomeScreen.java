@@ -23,8 +23,11 @@ public class StudentHomeScreen implements AppScene {
      * Default Contructor for LogInScene
      */
    StudentHomeScreen(){
+       makeScene();
        backButton = new Button( "Log out" );
        backButton.setOnAction( event -> GUI.setScene( GUI.getLogInScene() ) );
+       studentName = new Label();
+       System.out.println("Successfully created student homescreen");
    }
 
     /**
@@ -76,6 +79,8 @@ public class StudentHomeScreen implements AppScene {
 
     public void setStudent(Student student) {
         this.student = student;
+        System.out.println(student.getUsername() + "This one here!");
+        System.out.println(studentName.isFocused() + "After here");
         studentName.setText( this.student.getUsername() );
     }
 }

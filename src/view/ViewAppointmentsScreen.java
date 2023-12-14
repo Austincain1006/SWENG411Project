@@ -1,5 +1,8 @@
 package view;
 
+import DB.MySqlDB;
+import DB.User;
+import DB.dbAppointment;
 import Model.Account;
 import Model.Appointment;
 import Model.Student;
@@ -13,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -23,7 +27,7 @@ import java.util.ArrayList;
 public class ViewAppointmentsScreen implements AppScene{
     private VBox root;
     private HBox line1, line2, line3, line4, line5, line6, line7;
-    private Label selectAppt;
+    private Label selectAppt, appoinmentList;
     private ComboBox selectAppointment;
     private ArrayList<Appointment> appointments;
     private Label date, tutor, subject, location, comments;
@@ -50,16 +54,12 @@ public class ViewAppointmentsScreen implements AppScene{
         line6.setAlignment( Pos.CENTER );
         line7.setAlignment( Pos.CENTER );
 
-        selectAppt = new Label("Select an Appointment: ");
-        selectAppointment = new ComboBox();
-        appointments =  getAppointments();
-        selectAppointment.getItems().addAll( appointments );
+        selectAppt = new Label("Appointment list: ");
 
-        date = new Label("Null Date");
-        tutor = new Label("Null Tutor");
-        subject = new Label("Null Subject");
-        location = new Label("Null Location");
-        comments = new Label("Null Commments");
+        appoinmentList = new Label(getAppointments().toString());
+
+
+        /**
         Appointment appt = (Appointment) selectAppointment.getValue();
         if (appt != null) {
             date.setText( appt.getDateTime().printString() );
@@ -67,7 +67,7 @@ public class ViewAppointmentsScreen implements AppScene{
             subject.setText( appt.getSubject() );
             location.setText( appt.getLocation() );
             comments.setText( appt.getComments() );
-        }
+        }*/
 
         backButton = new Button("Back");
         backButton.setOnAction( event -> {
@@ -79,21 +79,14 @@ public class ViewAppointmentsScreen implements AppScene{
 
 
         line1.getChildren().add(selectAppt);
-        line1.getChildren().add(selectAppointment);
-        line2.getChildren().add(date);
-        line3.getChildren().add(tutor);
-        line4.getChildren().add(subject);
-        line5.getChildren().add(location);
-        line6.getChildren().add(comments);
+        line2.getChildren().add(appoinmentList);
+
         line7.getChildren().add(backButton);
 
 
         root.getChildren().add(line1);
         root.getChildren().add(line2);
-        root.getChildren().add(line3);
-        root.getChildren().add(line4);
-        root.getChildren().add(line5);
-        root.getChildren().add(line6);
+
         root.getChildren().add(line7);
 
         return new Scene(root, 400, 300 );
@@ -103,10 +96,68 @@ public class ViewAppointmentsScreen implements AppScene{
         this.account = acc;
     }
 
-    private ArrayList<Appointment> getAppointments(){
-        ArrayList<Appointment> results = new ArrayList<>();
+    private ArrayList<String> getAppointments(){
+        ArrayList<String> results = new ArrayList<>();
 
         // Get Appointments from Database tied to this account
+
+        /**
+         * Creation of the appointment list
+         */
+
+        //Initialize DB
+        MySqlDB db = new MySqlDB();
+        db.init();
+
+
+        User peter = new User("plm5256","password","plm5256@psu.edu","Peter Mica","Student");
+
+        User result = db.getLogin(peter.getPassword(), peter.getUserID());
+
+        //Get the appointment list resultset as an arraylist
+        ArrayList<dbAppointment> apptList = db.getAppointment(result);
+
+
+        //Get size of the Appointment list
+        int size = apptList.size();
+
+        //Iterate over appointment list
+        for (int i =0; i < size; i++) {
+            dbAppointment tempAppt = apptList.get(i);
+
+            //Process date into readable format
+            String dateUP = String.valueOf(tempAppt.getDate()); //Convert to string
+            String date = dateUP.substring(0,2) + "/" + dateUP.substring(2,4) + "/" + dateUP.substring(4);
+
+            //Process time into readable format
+
+            Integer dbTime = tempAppt.getTime();
+            //Determine AM or PM based on military time format
+            String amOrPM;
+            if (tempAppt.getTime() < 1200) {
+                amOrPM = "AM";
+            } else {
+                amOrPM = "PM";
+                if (tempAppt.getTime() > 1259) {
+                    dbTime -= 1200;
+                }
+
+            }
+
+            String timeUP = String.valueOf(dbTime); //Convert to string
+            System.out.println(timeUP);
+            String time = timeUP.substring(0,2) + ":" + timeUP + amOrPM;
+
+            String appt = "Appointment Number: " + tempAppt.getAppointmentNumber() +
+                    " | Date: " + date + "\n" +
+                    " | Time: " + time + "\n" +
+                    " | Location: " + tempAppt.getLocation() + "\n" +
+                    " | Subject: " + tempAppt.getSubject() + "\n" +
+                    " | Tutor: " + tempAppt.getTutor() + "\n" +
+                    " | Student" + tempAppt.getStudent() + "\n\n";
+            System.out.println(appt);
+            results.add(appt);
+        }
 
         return results;
     }

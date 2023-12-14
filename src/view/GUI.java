@@ -1,4 +1,5 @@
 package view;
+import DB.MySqlDB;
 import Model.Database;
 import Model.Faculty;
 import Model.Student;
@@ -15,7 +16,7 @@ public class GUI extends Application {
     private static Stage stage;
     private static LogInScene logInScene;
     private static RegisterUserScene registerUserScene;
-    private static Database DB;
+    private static MySqlDB DB;
     private static StudentHomeScreen studentHomeScreen;
     private static FacultyHomeScreen facultyHomeScreen;
     private static CreateAppointmentScreen createAppointmentScreen;
@@ -38,8 +39,9 @@ public class GUI extends Application {
 
     //Initializes all Scenes to be Used in GUI
     public void initialize(){
-        DB = new Database();
-        Database.addAccount( getDefaultFaculty() );
+        System.out.println("Initializing GUI");
+        DB = new MySqlDB();
+        //Database.addAccount( getDefaultFaculty() );
         logInScene = new LogInScene();
         registerUserScene = new RegisterUserScene();
         studentHomeScreen = new StudentHomeScreen();
@@ -79,11 +81,8 @@ public class GUI extends Application {
     }
 
 
-    public static Database getDB() {
-        return DB;
-    }
-
     public static StudentHomeScreen getStudentHomeScreen() {
+
         return studentHomeScreen;
     }
 

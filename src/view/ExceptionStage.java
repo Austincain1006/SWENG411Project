@@ -42,6 +42,7 @@ public class ExceptionStage {
 
     // Display Text Appropriate for Error Type
     public void setExceptionLabel( Exception e) {
+        System.out.println(e);
         if (e instanceof MissingFieldException)
             exceptionLabel = new Label("Empty input field. Please fill in all fields.");
         if (e instanceof InvalidLoginException)

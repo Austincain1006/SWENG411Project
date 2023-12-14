@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import view.GUI;
 import view.RegisterUserScene;
+import DB.User;
+import DB.MySqlDB;
 
 /**
  * RegisterNewAccountEvent.java
@@ -38,7 +40,11 @@ public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
      * @throws MissingFieldException
      */
     private void createAccount() throws MissingFieldException {
-        if ( registerScene.getIsCreatingUser() == true ){
+
+        MySqlDB db = new MySqlDB();
+        db.init();
+
+        if (registerScene.getIsCreatingUser()){
             // Make Student
             Student newStudent = new Student();
 
@@ -54,9 +60,24 @@ public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
                 throw new MissingFieldException();
             }
 
-            newStudent.setID( GUI.getDB().addAccount(newStudent) );
+            //newStudent.setID( GUI.getDB().addAccount(newStudent) );
 
-        } else if ( registerScene.getIsCreatingUser() == false ) {
+            /**
+             * Append DB with new user info if Student
+             */
+
+            //Store gathered info into user object
+            User myNewUser = new User(newStudent.getUsername(),
+                    newStudent.getPassword(),
+                    newStudent.getUsername() + "@psu.edu",
+                    "",
+                    "Student");
+
+            //Add User object to DB
+            db.addUser(myNewUser);
+
+
+        } else if (!registerScene.getIsCreatingUser()) {
             // Make Tutor
             Tutor newTutor = new Tutor();
 
@@ -72,7 +93,21 @@ public class RegisterNewAccountEvent implements EventHandler<ActionEvent> {
                 throw new MissingFieldException();
             }
 
-            newTutor.setID( GUI.getDB().addAccount(newTutor) );
+            //newTutor.setID( GUI.getDB().addAccount(newTutor) );
+
+            /**
+             * Append DB with new user info if Tutor
+             */
+
+            //Store gathered info into user object
+            User myNewUser = new User(newTutor.getUsername(),
+                    newTutor.getPassword(),
+                    newTutor.getUsername() + "@psu.edu",
+                    "",
+                    "Tutor");
+
+            //Add User object to DB
+            db.addUser(myNewUser);
 
         } else {
             throw new MissingFieldException();

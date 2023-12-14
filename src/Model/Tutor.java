@@ -14,7 +14,7 @@ public class Tutor extends Account {
         super();
 
     }
-    Tutor(String username, String password) {
+    public Tutor(String username, String password) {
         super(username, password);
     }
 }

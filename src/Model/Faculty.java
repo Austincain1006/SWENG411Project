@@ -12,7 +12,7 @@ public class Faculty extends Account{
         super();
     }
 
-    Faculty(String username, String password) {
+    public Faculty(String username, String password) {
         super(username, password);
     }
 }

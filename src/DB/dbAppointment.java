@@ -1,3 +1,5 @@
+package DB;
+
 /**
  * This class stores the resultset from the DB
  * @author Peter Mica
@@ -15,5 +17,33 @@ public class dbAppointment {
         this.subject = subject;
         this.tutor = tutor;
         this.student = student;
+    }
+
+    public Integer getAppointmentNumber() {
+        return appointmentNumber;
+    }
+
+    public Integer getDate() {
+        return date;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getTutor() {
+        return tutor;
+    }
+
+    public String getStudent() {
+        return student;
     }
 }

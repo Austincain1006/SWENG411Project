@@ -4,12 +4,15 @@
  * @author Peter Mica
  */
 
+package DB;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 //Query methods
 public class MySqlDB {
-    Connection db;
+    static Connection db;
 
     /**
      * This function must be called before any use of queries to establish connection to the DB
@@ -24,6 +27,7 @@ public class MySqlDB {
 
             db = DriverManager.getConnection(jdbcURL, username, password);
 
+            System.out.println("init db");
         } catch (SQLException e) {  //Exception in case of no connection
             System.err.println(e);
         }
@@ -134,6 +138,7 @@ public class MySqlDB {
         String query = "SELECT * FROM USERS WHERE USER_ID = ? AND Password = ?";
 
         try {
+
             PreparedStatement preparedStatement = db.prepareStatement(query);
             preparedStatement.setString(1,argUsername);
             preparedStatement.setString(2,argPassword);
@@ -141,15 +146,24 @@ public class MySqlDB {
             //Query Statement
             preparedStatement.execute();
 
+            System.out.println(preparedStatement);
+
             ResultSet rs = preparedStatement.getResultSet();
+
 
             //Desired information
             while (rs.next()) {
+
                 String username = rs.getString("USER_ID");
                 String password = rs.getString("Password");
                 String email = rs.getString("Email");
                 String name = rs.getString("Name");
                 String userType = rs.getString("UserType");
+
+                if (!Objects.equals(username, argUsername) || !Objects.equals(password, argPassword)) {
+                    System.out.println("Bad login");
+                    return null;
+                }
 
                 myUser = new User(username,password,email,name,userType);
             }
@@ -162,6 +176,48 @@ public class MySqlDB {
         return myUser;
     }
 
+    public void closeConnection() {
+        try {
+            db.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
+    //Function to get the list of tutors
+    public ArrayList<User> getTutorList() {
+        //Creat temp list
+        ArrayList<User> tutorList = new ArrayList<>();
+
+        //Query to grab all appointments from the appointments table where the student matches the current user
+        String query = "SELECT * FROM USERS WHERE UserType = 'Tutor' ORDER BY Name ASC";
+
+        try {
+            PreparedStatement preparedStatement = db.prepareStatement(query);
+
+            //Query Statement
+            preparedStatement.execute();
+
+
+            ResultSet rs = preparedStatement.getResultSet();
+
+            //Desired information
+            while (rs.next()) {
+                String userID = rs.getString("USER_ID");
+                String pass = rs.getString("Date");
+                String email = rs.getString("Time");
+                String name = rs.getString("Name");
+                String userType = rs.getString("UserType");
+
+                tutorList.add(new User(userID,pass,email,name,userType));
+            }
+        }catch (SQLException e) { //Exception in case of no connection
+            System.err.println(e);
+        }
+
+        return tutorList;
+    }
+
     //Main method for testing DB queries
     public static void main(String[] args) {
 
@@ -172,18 +228,22 @@ public class MySqlDB {
         //Create User
         User peter = new User("plm5256","password","plm5256@psu.edu","Peter Mica","Student");
 
-        db.getAppointment(peter);
 
-        ArrayList<dbAppointment> apptList = db.getAppointment(peter);
+        User result = db.getLogin(peter.password,peter.userID);
 
-        //Get size of apptList
+        //Get the appointment list resultset as an arraylist
+        ArrayList<dbAppointment> apptList = db.getAppointment(result);
+
+        //Get size of the Appointment list
         int size = apptList.size();
 
-        //Iterate over arraylist of appts
-        for (int i = 0; i < size; i++) {
-            //Print the subject of each appointment
-            System.out.println("Subject:" + apptList.get(i).date);
+        //Iterate over appointment list
+        for (int i =0; i < size; i++) {
+            dbAppointment tempAppt = apptList.get(i);
+            System.out.println(tempAppt.date);
         }
 
     }
+
+
 }

@@ -10,13 +10,16 @@ abstract public class Account {
     protected String password;
     private Integer id;
 
-    Account() {
+    public Account() {
 
     }
 
-    Account(String username, String password) {
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
+        System.out.println("Creating account");
+        System.out.println(username);
+        System.out.println(password);
     }
 
     // Gets Username of Account

@@ -87,6 +87,7 @@ public class LogInScene implements AppScene {
     }
 
     public TextField getUsernameField(){
+
         return usernameField;
     }
 
