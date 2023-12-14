@@ -57,7 +57,7 @@ public class ViewAppointmentsScreen implements AppScene{
         selectAppt = new Label("Appointment list: ");
 
         appoinmentList = new Label(getAppointments().toString());
-
+        System.out.println(account.getUsername());
 
         /**
         Appointment appt = (Appointment) selectAppointment.getValue();
@@ -109,10 +109,7 @@ public class ViewAppointmentsScreen implements AppScene{
         MySqlDB db = new MySqlDB();
         db.init();
 
-
-        User peter = new User("plm5256","password","plm5256@psu.edu","Peter Mica","Student");
-
-        User result = db.getLogin(peter.getPassword(), peter.getUserID());
+        User result = db.getLogin(account.getPassword(), account.getUsername());
 
         //Get the appointment list resultset as an arraylist
         ArrayList<dbAppointment> apptList = db.getAppointment(result);
@@ -145,9 +142,10 @@ public class ViewAppointmentsScreen implements AppScene{
             }
 
             String timeUP = String.valueOf(dbTime); //Convert to string
-            System.out.println(timeUP);
+
             String time = timeUP.substring(0,2) + ":" + timeUP + amOrPM;
 
+            //Converts relevant data to a string literal to put into the arraylist
             String appt = "Appointment Number: " + tempAppt.getAppointmentNumber() +
                     " | Date: " + date + "\n" +
                     " | Time: " + time + "\n" +
@@ -155,7 +153,6 @@ public class ViewAppointmentsScreen implements AppScene{
                     " | Subject: " + tempAppt.getSubject() + "\n" +
                     " | Tutor: " + tempAppt.getTutor() + "\n" +
                     " | Student" + tempAppt.getStudent() + "\n\n";
-            System.out.println(appt);
             results.add(appt);
         }
 
