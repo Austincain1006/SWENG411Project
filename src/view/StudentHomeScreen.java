@@ -49,7 +49,11 @@ public class StudentHomeScreen implements AppScene {
         line4.setAlignment( Pos.CENTER );
 
         studentName = new Label();
-        studentName.setText( "Student Name" );
+        if (student == null) {
+            studentName.setText("null student");
+        } else {
+            studentName.setText(this.student.getUsername());
+        }
         scheduleButton = new Button("Schedule Appointment");
         scheduleButton.setOnAction( event -> {
             GUI.getCreateAppointmentScreen().setStudent( this.student );
